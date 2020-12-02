@@ -1,10 +1,9 @@
 * {
   box-sizing: border-box;
-  margin: 0;
 }
 
 body {
-  background: grey;
+  background-color: #110019;
 }
 
 .header {
@@ -16,8 +15,121 @@ body {
 }
 
 #title-cinelist {
+  margin: auto;
+}
+
+#movies-header {
+  width: 100%;
+  text-align: center;
+  margin: auto;
+  color: white;
+}
+
+.movies {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: auto;
+  justify-content: space-evenly;
+  width: 70%;
+}
+
+.movie {
+  width: 150px;
+  display: grid;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  margin: 10px;
+}
+
+.movie-image {
+  width: 150px;
+  height: auto;
+}
+
+.movies-title {
+  flex-wrap: wrap;
+  font-size: xx-small;
+  margin: 10px auto;
+}
+
+#myList-header {
+  width: 100%;
+  text-align: center;
+  margin: auto;
+  color: white;
+}
+
+.myList-container {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: auto;
+  justify-content: space-evenly;
+  width: 30%;
+}
+
+.myList-movie {
+  width: 150px;
+  display: grid;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+}
+
+.myListMovie-image {
+  width: 100px;
+  height: auto;
+  margin-top: 20px;
+}
+
+.myListMovie-header {
+  flex-wrap: wrap;
+  font-size: xx-small;
+  margin: 10px auto;
+  color: white;
+}
+
+#rating-input {
+  height: 15px;
+  width: 100px;
+  font-size: 10px;
+}
+
+#rating-submit {
+  height: auto;
+  width: 100px;
+  font-size: 10px;
+}
+
+#comments-input {
+  height: 15px;
+  width: 100px;
+  font-size: 10px;
+}
+
+#comments-submit {
+  height: auto;
+  width: 100px;
+  font-size: 10px;
+}
+
+#title-cinelist {
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #D4AF37;
   padding-left: 20px;
 }
+
+
+.display {
+  display: flex;
+  width: 100vw;
+  height: 90vh;
+}
+
+

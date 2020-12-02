@@ -55,31 +55,23 @@ module.exports = {
     },
     rateMovie: (req, res) => {
         const {myList_id} = req.params;
+        const {rating} = req.body;
 
-        // You can either "increase" or "decrease" the rating, starting at 0
-        const {action} = req.query;
-        
+        console.log(req.body);
+
         const index = myList.items.findIndex((element) => element.myList_id === +myList_id);
 
         if (index === -1) {
             return res.status(404).send("Movie not in list");
         }
 
-        if (action === "increase") {
-            myList.items[index].rating++;
-        } else if (action === "decrease") {
-            if (myList.items[index].rating === 0) {
-                return res.status(400).send(`Select a number between 0 and 10`);
-            } else {
-                myList.items[index].rating--;
-            }
-        } else {
-            return res.status(400).send(`Query ${action} is not supported. Use either "increase" or "decrease"`);
-        }
+        myList.items[index].rating = +rating;
+
         res.status(200).send(myList);
     },
     commentMovie: (req, res) => {
-        const {myList_id, comments} = req.body;
+        const {myList_id} = req.params;
+        const {comments} = req.body;
 
         const index = myList.items.findIndex((element) => element.myList_id === +myList_id);
 
@@ -88,6 +80,7 @@ module.exports = {
         }
 
         myList.items[index].comments = comments;
+
         res.status(200).send(myList);
     },
     removeFromMyList: (req, res) => {
