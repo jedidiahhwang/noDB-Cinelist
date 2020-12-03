@@ -65,6 +65,10 @@ module.exports = {
             return res.status(404).send("Movie not in list");
         }
 
+        if (rating > 10 || rating < 0) {
+            return res.status(404).send("Enter a number between 0 and 10");
+        }
+        
         myList.items[index].rating = +rating;
 
         res.status(200).send(myList);
@@ -72,6 +76,8 @@ module.exports = {
     commentMovie: (req, res) => {
         const {myList_id} = req.params;
         const {comments} = req.body;
+
+        console.log(req.body);
 
         const index = myList.items.findIndex((element) => element.myList_id === +myList_id);
 
@@ -93,5 +99,5 @@ module.exports = {
         }
         myList.items.splice(index, 1);
         res.status(200).send(myList);
-    }
+    },
 }

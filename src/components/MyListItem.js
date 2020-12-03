@@ -5,12 +5,28 @@ class MyListItem extends Component {
         super();
 
         this.state = {
-            ratingInput: 0,
+            ratingInput: "",
             commentsInput: "",
         }
         
         this.handleRatingChange = this.handleRatingChange.bind(this);
         this.handleCommentsChange = this.handleCommentsChange.bind(this);
+    }
+
+    submitComment() {
+        this.props.commentMovie(this.props.item.myList_id, this.state.commentsInput);
+
+        this.setState ({
+            commentsInput: "",
+        });
+    }
+
+    submitRating() {
+        this.props.rateMovie(this.props.item.myList_id, this.state.ratingInput);
+
+        this.setState ({
+            ratingInput: "",
+        })
     }
 
     handleRatingChange(userInput) {
@@ -28,7 +44,7 @@ class MyListItem extends Component {
 
     render () {
         return (
-            <div className="myListMovie">
+            <section className="myListMovie">
                 <img
                     className="myListMovie-image"
                     src={this.props.item.image}
@@ -36,7 +52,7 @@ class MyListItem extends Component {
                 />
                 <p className="myListMovie-header">{this.props.item.title}</p>
                 <p className="myListMovie-header">Directed by: {this.props.item.director}</p>
-                <p className="myListMovie-header">Rating: </p>
+                <p className="myListMovie-header">Rating: {this.props.item.rating}/10</p>
                 <input
                     id="rating-input"
                     placeholder="Enter Rating"
@@ -45,11 +61,11 @@ class MyListItem extends Component {
                 />
                 <button 
                     id="rating-submit"
-                    onClick={() => this.props.rateMovie(this.props.item.myList_id, this.state.ratingInput)}
+                    onClick={() => this.submitRating()}
                 >
                     Submit Rating
                 </button>
-                <p className="myListMovie-header">Comments: </p>
+                <p className="myListMovie-header">Comments: {this.props.item.comments}</p>
                 <input
                     id="comments-input"
                     placeholder="Enter Comments"
@@ -58,11 +74,11 @@ class MyListItem extends Component {
                 />
                 <button
                     id="comments-submit"
-                    onClick={() => this.props.commentMovie(this.props.item.myList_id, this.state.commentsInput)}
+                    onClick={() => this.submitComment()}
                 >
                     Submit Comments
                 </button>
-            </div>
+            </section>
         )
     }
 }

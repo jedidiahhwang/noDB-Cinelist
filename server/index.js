@@ -9,6 +9,8 @@ app.use(express.json());
 
 // Movies endpoints
 app.get("/api/movies", moviesCtrl.getAllMovies); // Postman passed
+app.put("/api/movies/:title", moviesCtrl.filterMovies); // Postman passed
+app.put("/api/movies", moviesCtrl.clearMovies); // Postman passed
 
 // MyList endpoints
 app.get("/api/myList", myListCtrl.getMyList); // Postman passed

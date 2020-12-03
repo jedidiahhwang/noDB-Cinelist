@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import Movies from "./Movies";
 import MyList from "./MyList";
+import SearchBar from "./SearchBar";
 import axios from "axios";
 
 class Display extends Component {
@@ -16,6 +17,8 @@ class Display extends Component {
             }
         }
 
+        this.filterMovies = this.filterMovies.bind(this);
+        this.clearMovies = this.clearMovies.bind(this);
         this.addToMyList = this.addToMyList.bind(this);
         this.rateMovie = this.rateMovie.bind(this);
         this.commentMovie = this.commentMovie.bind(this);
@@ -24,6 +27,27 @@ class Display extends Component {
 
     componentDidMount () {
         axios.get("/api/movies").then((res) => {
+            this.setState ({
+                movies: res.data,
+            })
+        })
+    }
+
+    filterMovies (title, action) {
+        const body = {
+            title: title,
+        }
+        axios.put(`/api/movies/${title}?action=${action}`, body).then((res) => {
+            this.setState ({
+                movies: res.data,
+            })
+        }).catch((e) => {
+            console.log("Movie not found");
+        })
+    }
+
+    clearMovies () {
+        axios.put("/api/movies").then((res) => {
             this.setState ({
                 movies: res.data,
             })
@@ -79,7 +103,15 @@ class Display extends Component {
     render () {
         return (
             <div className="display">
-                <Movies addToMyList={this.addToMyList} movies={this.state.movies}/>
+                <SearchBar
+                    filterMovies={this.filterMovies}
+                    clearMovies={this.clearMovies}
+                    movies={this.state.movies}
+                />
+                <Movies 
+                    addToMyList={this.addToMyList} 
+                    movies={this.state.movies}
+                />
                 <MyList
                     myList={this.state.myList}
                     removeFromMyList={this.removeFromMyList}
